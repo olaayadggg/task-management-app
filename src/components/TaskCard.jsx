@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
 const TaskCard = ({ task, onUpdate, onDelete }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedTask, setUpdatedTask] = useState(task);
@@ -29,26 +28,45 @@ const TaskCard = ({ task, onUpdate, onDelete }) => {
     setImagePreview(null); // Clear the image preview
   };
 
-  // Generate image URL for display
-  const imageUrl = imagePreview || (updatedTask.image && updatedTask.image instanceof File ? URL.createObjectURL(updatedTask.image) : null);
-
+  const imageUrl =
+    imagePreview ||
+    (updatedTask.image
+      ? updatedTask.image instanceof File
+        ? URL.createObjectURL(updatedTask.image) // Handle File objects
+        : updatedTask.image
+      : null); // Fallback to null if no image is provided
   return (
-    <div className="card h-100 shadow-sm hover-shadow" style={{ transition: 'transform 0.2s, box-shadow 0.2s' }}>
+    <div
+      className="card h-100 shadow-sm hover-shadow mb-3"
+      style={{ transition: "transform 0.2s, box-shadow 0.2s" }}
+    >
       {imageUrl && (
-        <img src={imageUrl} alt="Task" className="card-img-top" style={{ height: '200px', objectFit: 'cover' }} />
+        <img
+          src={imageUrl}
+          alt="Task"
+          className="card-img-top"
+          style={{ height: "200px", objectFit: "cover" }}
+        />
       )}
       <div className="card-body d-flex flex-column text-start">
         {isEditing ? (
           <div>
             <div className="mb-3">
               <label className="form-label">Change Image</label>
-              <input type="file" accept="image/jpeg, image/png, image/gif" onChange={handleImageChange} className="form-control" />
+              <input
+                type="file"
+                accept="image/jpeg, image/png, image/gif"
+                onChange={handleImageChange}
+                className="form-control"
+              />
             </div>
             <div className="mb-3">
               <label className="form-label">Title</label>
               <input
                 value={updatedTask.title}
-                onChange={(e) => setUpdatedTask({ ...updatedTask, title: e.target.value })}
+                onChange={(e) =>
+                  setUpdatedTask({ ...updatedTask, title: e.target.value })
+                }
                 className="form-control"
               />
             </div>
@@ -56,7 +74,12 @@ const TaskCard = ({ task, onUpdate, onDelete }) => {
               <label className="form-label">Description</label>
               <textarea
                 value={updatedTask.description}
-                onChange={(e) => setUpdatedTask({ ...updatedTask, description: e.target.value })}
+                onChange={(e) =>
+                  setUpdatedTask({
+                    ...updatedTask,
+                    description: e.target.value,
+                  })
+                }
                 className="form-control"
               />
             </div>
@@ -64,7 +87,9 @@ const TaskCard = ({ task, onUpdate, onDelete }) => {
               <label className="form-label">Priority</label>
               <select
                 value={updatedTask.priority}
-                onChange={(e) => setUpdatedTask({ ...updatedTask, priority: e.target.value })}
+                onChange={(e) =>
+                  setUpdatedTask({ ...updatedTask, priority: e.target.value })
+                }
                 className="form-control"
               >
                 <option value="low">Low</option>
@@ -76,7 +101,9 @@ const TaskCard = ({ task, onUpdate, onDelete }) => {
               <label className="form-label">Status</label>
               <select
                 value={updatedTask.status}
-                onChange={(e) => setUpdatedTask({ ...updatedTask, status: e.target.value })}
+                onChange={(e) =>
+                  setUpdatedTask({ ...updatedTask, status: e.target.value })
+                }
                 className="form-control"
               >
                 <option value="todo">To Do</option>
@@ -96,16 +123,24 @@ const TaskCard = ({ task, onUpdate, onDelete }) => {
             <h5 className="card-title fw-bold">{task.title}</h5>
             <p className="card-text text-muted">{task.description}</p>
             <div className="mb-2">
-              <span className="badge bg-info me-2">Priority: {task.priority}</span>
+              <span className="badge bg-info me-2">
+                Priority: {task.priority}
+              </span>
               <span className="badge bg-warning">Status: {task.status}</span>
             </div>
           </div>
         )}
         <div className="mt-auto d-flex justify-content-between">
-          <button onClick={() => setIsEditing(true)} className="btn btn-outline-warning">
+          <button
+            onClick={() => setIsEditing(true)}
+            className="btn btn-outline-warning"
+          >
             Edit
           </button>
-          <button onClick={() => onDelete(task.id)} className="btn btn-outline-danger">
+          <button
+            onClick={() => onDelete(task.id)}
+            className="btn btn-outline-danger"
+          >
             Delete
           </button>
         </div>
