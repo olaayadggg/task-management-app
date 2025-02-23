@@ -56,73 +56,68 @@ const HomePage = () => {
   });
 
   return (
-    <div className="container mt-4">
-      <h1 className="text-center mb-4">Task Management App</h1>
+    <div className="bg-light min-vh-100 p-4">
+      <div className="container">
+        {/* Header */}
+        <h1 className="text-center mb-4">Task Management App</h1>
 
-      {/* Button to toggle form visibility */}
-      <div className="text-center mb-4">
-        <button
-          className="btn btn-primary"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? 'Hide Form' : 'Add New Task'}
-        </button>
-      </div>
+        {/* Search Bar and Add New Button */}
+        <div className="d-flex justify-content-between align-items-center mb-4">
+          <div className="flex-grow-1 me-3 mt-3">
+            <SearchBar onSearch={handleSearch} />
+          </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => setShowForm(!showForm)}
+          >
+            {showForm ? 'Hide Form' : 'Add New Task'}
+          </button>
+        </div>
 
-      {/* Form (conditionally rendered) */}
-      {showForm && (
-        <div className="row mb-4">
-          <div className="col-md-8 offset-md-2">
+        {/* Form  */}
+        {showForm && (
+          <div className="mb-4">
             <TaskForm onSubmit={handleAddTask} />
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Search Bar and Filters */}
-      <div className="row mb-4">
-        <div className="col-md-8 offset-md-2">
-          <SearchBar onSearch={handleSearch} />
-        </div>
-      </div>
-      <div className="row mb-4">
-        <div className="col-md-8 offset-md-2">
-          <div className="row g-3">
-            <div className="col-md-6">
-              <label htmlFor="stateFilter" className="form-label">Filter by State</label>
-              <select
-                id="stateFilter"
-                className="form-select"
-                onChange={(e) => handleStateFilter(e.target.value)}
-                value={filters.state || ''}
-              >
-                <option value="">All States</option>
-                <option value="todo">To Do</option>
-                <option value="doing">Doing</option>
-                <option value="done">Done</option>
-              </select>
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="priorityFilter" className="form-label">Filter by Priority</label>
-              <select
-                id="priorityFilter"
-                className="form-select"
-                onChange={(e) => handlePriorityFilter(e.target.value)}
-                value={filters.priority || ''}
-              >
-                <option value="">All Priorities</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
+        {/* Task Filters */}
+        <div className="row g-3 mb-4">
+          <div className="col-md-6 text-start">
+            <label htmlFor="stateFilter" className="form-label">Filter by State</label>
+            <select
+              id="stateFilter"
+              className="form-select"
+              onChange={(e) => handleStateFilter(e.target.value)}
+              value={filters.state || ''}
+            >
+              <option value="">All States</option>
+              <option value="todo">To Do</option>
+              <option value="doing">Doing</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+          <div className="col-md-6 text-start">
+            <label htmlFor="priorityFilter" className="form-label">Filter by Priority</label>
+            <select
+              id="priorityFilter"
+              className="form-select"
+              onChange={(e) => handlePriorityFilter(e.target.value)}
+              value={filters.priority || ''}
+            >
+              <option value="">All Priorities</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
           </div>
         </div>
-      </div>
 
-      {/* Task List */}
-      <div className="row">
-        <div className="col-md-10 offset-md-1">
-          <TaskList tasks={filteredTasks} onUpdate={handleUpdateTask} onDelete={handleDeleteTask} />
+        {/* Task List */}
+        <div className="row">
+          <div className="col">
+            <TaskList tasks={filteredTasks} onUpdate={handleUpdateTask} onDelete={handleDeleteTask} />
+          </div>
         </div>
       </div>
     </div>

@@ -38,17 +38,17 @@ const TaskForm = ({ onSubmit, defaultValues }) => {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="card p-4 shadow-sm">
-      <div className="mb-3">
+      <div className="mb-3 d-flex flex-column align-items-start">
         <label className="form-label">Title</label>
         <input {...register('title')} className={`form-control ${errors.title ? 'is-invalid' : ''}`} />
         {errors.title && <div className="invalid-feedback">{errors.title.message}</div>}
       </div>
-      <div className="mb-3">
+      <div className="mb-3 d-flex flex-column align-items-start">
         <label className="form-label">Description</label>
         <textarea {...register('description')} className={`form-control ${errors.description ? 'is-invalid' : ''}`} />
         {errors.description && <div className="invalid-feedback">{errors.description.message}</div>}
       </div>
-      <div className="mb-3">
+      <div className="mb-3 d-flex flex-column align-items-start">
         <label className="form-label">Priority</label>
         <select {...register('priority')} className={`form-control ${errors.priority ? 'is-invalid' : ''}`}>
           <option value="low">Low</option>
@@ -57,7 +57,7 @@ const TaskForm = ({ onSubmit, defaultValues }) => {
         </select>
         {errors.priority && <div className="invalid-feedback">{errors.priority.message}</div>}
       </div>
-      <div className="mb-3">
+      <div className="mb-3 d-flex flex-column align-items-start">
         <label className="form-label">Status</label>
         <select {...register('status')} className={`form-control ${errors.status ? 'is-invalid' : ''}`}>
           <option value="todo">To Do</option>
@@ -66,7 +66,7 @@ const TaskForm = ({ onSubmit, defaultValues }) => {
         </select>
         {errors.status && <div className="invalid-feedback">{errors.status.message}</div>}
       </div>
-      <div className="mb-3">
+      <div className="mb-3 d-flex flex-column align-items-start">
         <label className="form-label">Image</label>
         <input
           type="file"

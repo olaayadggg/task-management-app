@@ -37,7 +37,7 @@ const TaskCard = ({ task, onUpdate, onDelete }) => {
       {imageUrl && (
         <img src={imageUrl} alt="Task" className="card-img-top" style={{ height: '200px', objectFit: 'cover' }} />
       )}
-      <div className="card-body d-flex flex-column">
+      <div className="card-body d-flex flex-column text-start">
         {isEditing ? (
           <div>
             <div className="mb-3">
@@ -60,7 +60,7 @@ const TaskCard = ({ task, onUpdate, onDelete }) => {
                 className="form-control"
               />
             </div>
-            <div className="mb-3">
+            <div className="mb-3 ">
               <label className="form-label">Priority</label>
               <select
                 value={updatedTask.priority}
